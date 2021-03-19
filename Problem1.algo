@@ -1,0 +1,50 @@
+ALGORITHM algorithm_name
+VAR
+   
+    tab1= ARRAY_OF INTEGER[10];
+    tab2= ARRAY_OF INTEGER[10];
+    htab : HASH_TABLE<INTEGER,INTEGER>;
+   
+    i : INTEGER=0;
+    nbr : INTEGER;
+    sum : INTEGER = 0;
+   
+BEGIN
+
+  tab1 := {3, 1, 7, 9};
+  tab2 := {2, 4, 1, 9, 3};
+
+    // Insert elements from tab1 to  HASH_TABLE 
+    FOR i FROM 1 TO  tab1.length-1  STEP 1  DO 
+           IF (htab.lookup(tab1[i])== true)
+                nbr = htab.getValue(tab1[i]) ;
+                htab.Insert(tab1[i],nbr+1);
+            ELSE 
+                htab.Insert(tab1[i],1);
+            End_If
+             
+        END_FOR
+              
+
+    // Insert elements from tab2 to  HASH_TABLE 
+    FOR i FROM 1 TO  tab2.length-1  STEP 1  DO 
+        if (htab.lookup(tab2[i])== true)
+                nbr = htab.getValue(tab2[i]) ;
+                htab.Insert(tab2[i],nbr+1);
+        ElSE
+                htab.Insert(tab2[i],1);
+        End_If
+               
+    END_FOR
+
+    //Get sum of distinct elements
+    Elems = htab.getKeys()
+    FOR i FROM 1 TO  Elems.length-1  STEP 1  DO
+        IF (htab.getValue(Elems[i]) == 1) THEN
+             sum += Elems[i] ;
+        END_IF
+       
+    END_FOR
+
+         Write("Sum of distinct elements: "+ sum)
+END
